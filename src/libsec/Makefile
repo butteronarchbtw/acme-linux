@@ -1,0 +1,56 @@
+ROOT_DIR=../..
+
+LIB=libsec.a
+OBJ=\
+	aes.o\
+	blowfish.o\
+	decodepem.o\
+	des.o\
+	des3CBC.o\
+	des3ECB.o\
+	desCBC.o\
+	desECB.o\
+	desmodes.o\
+	dsaalloc.o\
+	dsagen.o\
+	dsaprimes.o\
+	dsaprivtopub.o\
+	dsasign.o\
+	dsaverify.o\
+	egalloc.o\
+	egdecrypt.o\
+	egencrypt.o\
+	eggen.o\
+	egprivtopub.o\
+	egsign.o\
+	egverify.o\
+	fastrand.o\
+	genprime.o\
+	genrandom.o\
+	gensafeprime.o\
+	genstrongprime.o\
+	hmac.o\
+	md4.o\
+	md5.o\
+	md5block.o\
+	md5pickle.o\
+	nfastrand.o\
+	prng.o\
+	probably_prime.o\
+	rc4.o\
+	readcert.o\
+	rsaalloc.o\
+	rsadecrypt.o\
+	rsaencrypt.o\
+	rsafill.o\
+	rsagen.o\
+	rsaprivtopub.o\
+	sha1.o\
+	sha1block.o\
+	sha1pickle.o\
+	smallprimetest.o\
+	thumb.o\
+	tlshand.o\
+	x509.o
+
+include $(ROOT_DIR)/make/lib.mk

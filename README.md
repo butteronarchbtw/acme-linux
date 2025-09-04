@@ -1,6 +1,6 @@
 personal port of part of the plan9 ecosystem to unix makefiles
 
-this fork contains just enough for building acme and setting a custom font
+this fork contains just enough for building acme or sam and setting a custom font
 
 mainly for educational purposes (and because building plan9port was too slow for me)
 
@@ -9,7 +9,13 @@ all code is taken from [plan9port](https://github.com/9fans/plan9port), please s
 # Building
 
 ```sh
-make
+./configure acme && make
+```
+
+or
+
+```sh
+./configure sam && make
 ```
 
 # Installing
@@ -50,7 +56,7 @@ to run acme
 
 # Gentoo
 
-here is an example ebuild i use on gentoo to install acme system wide
+here is an example ebuild i use on gentoo to install acme system-wide
 
 ```ebuild
 EAPI=8
@@ -69,6 +75,10 @@ BDEPEND=""
 inherit git-r3 multiprocessing
 
 EGIT_REPO_URI="https://github.com/butteronarchbtw/acme-linux.git"
+
+src_configure() {
+	./configure acme
+}
 
 src_compile() {
 	emake

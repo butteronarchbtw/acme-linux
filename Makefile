@@ -6,29 +6,11 @@ prefix?=/usr/local
 bindir=$(DESTDIR)$(prefix)/bin
 mandir=$(DESTDIR)$(prefix)/share/man
 
-BINS=\
-	$(SRC_DIR)/cmd/9pserve/9pserve \
-	$(SRC_DIR)/cmd/devdraw/devdraw \
-	$(SRC_DIR)/cmd/fontsrv/fontsrv \
-	$(SRC_DIR)/cmd/9p/9p \
-	$(SRC_DIR)/cmd/9pfuse/9pfuse
+-include config.mk
 
 INSTALLED_BINS=$(addprefix $(bindir)/, $(notdir $(BINS)))
-
-MAN1S=\
-	$(MAN_DIR)/man1/devdraw.1 \
-	$(MAN_DIR)/man1/9p.1
-
 INSTALLED_MAN1S=$(patsubst $(MAN_DIR)/%, $(mandir)/%, $(MAN1S))
-
-MAN4S=\
-	$(MAN_DIR)/man4/9pserve.4 \
-	$(MAN_DIR)/man4/fontsrv.4 \
-	$(MAN_DIR)/man4/9pfuse.4
-
 INSTALLED_MAN4S=$(patsubst $(MAN_DIR)/%, $(mandir)/%, $(MAN4S))
-
--include config.mk
 
 .PHONY: all $(SRC_DIR) install uninstall clean distclean
 

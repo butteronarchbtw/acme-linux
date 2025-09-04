@@ -1,18 +1,31 @@
 #!/usr/bin/env bash
 
+cfg="config.mk"
+declare -a bins
+declare -a man1s
+declare -a man4s
+
 usage() {
 	printf "usage:\n"
 	printf "\t$0 (acme|sam)\n"
 }
 
-if [[ ! $# -eq 1 ]]; then
+add_command() {
+	if ! command -v $1 &> /dev/null; then
+		bins+=("\$(SRC_DIR)/cmd/$1/$1")
+
+		if [[ $2 = 1 ]]; then
+			man1s+="\$(MAN_DIR)/man1/$1.1"
+		else
+			man4s+="\$(MAN_DIR)/man4/$1.4"
+		fi
+	fi
+}
+
+if [[ ! $# = 1 ]]; then
 	usage
 	exit 1
 fi
-
-cfg="config.mk"
-declare -a bins
-declare -a man1s
 
 case $1 in
 	acme)
@@ -30,6 +43,15 @@ case $1 in
 	;;
 esac
 
+:>$cfg
+
+add_command 9pserve 4
+add_command devdraw 1
+add_command fontsrv 4
+add_command 9p 1
+add_command 9pfuse 4
+
 IFS=' '
-printf "BINS+=%s\n" "${bins[*]}" > $cfg
-printf "MAN1S+=%s\n" "${man1s[*]}" >> $cfg
+printf "BINS=%s\n" "${bins[*]}" >> $cfg
+printf "MAN1S=%s\n" "${man1s[*]}" >> $cfg
+printf "MAN4S=%s\n" "${man4s[*]}" >> $cfg

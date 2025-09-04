@@ -15,9 +15,9 @@ add_command() {
 		bins+=("\$(SRC_DIR)/cmd/$1/$1")
 
 		if [[ $2 = 1 ]]; then
-			man1s+="\$(MAN_DIR)/man1/$1.1"
+			man1s+=("\$(MAN_DIR)/man1/$1.1")
 		else
-			man4s+="\$(MAN_DIR)/man4/$1.4"
+			man4s+=("\$(MAN_DIR)/man4/$1.4")
 		fi
 	fi
 }

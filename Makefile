@@ -26,9 +26,9 @@ $(SRC_DIR):
 
 install: all
 	install -d $(bindir) $(mandir)/man1 $(mandir)/man4
-	install -m 0755 $(BINS) $(bindir)
-	install -m 0644 $(MAN1S) $(mandir)/man1
-	install -m 0644 $(MAN4S) $(mandir)/man4
+	[ -n "$(BINS)" ] && install -m 0755 $(BINS) $(bindir) || true
+	[ -n "$(MAN1S)" ] && install -m 0644 $(MAN1S) $(mandir)/man1 || true
+	[ -n "$(MAN4S)" ] && install -m 0644 $(MAN4S) $(mandir)/man4 || true
 
 uninstall:
 	-rm $(INSTALLED_BINS)

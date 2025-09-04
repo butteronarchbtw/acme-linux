@@ -12,14 +12,17 @@ BINS=\
 	$(SRC_DIR)/cmd/devdraw/devdraw \
 	$(SRC_DIR)/cmd/fontsrv/fontsrv \
 	$(SRC_DIR)/cmd/9p/9p \
-	$(SRC_DIR)/cmd/9pfuse/9pfuse
+	$(SRC_DIR)/cmd/9pfuse/9pfuse \
+	$(SRC_DIR)/cmd/sam/sam \
+	$(SRC_DIR)/cmd/samterm/samterm
 
 INSTALLED_BINS=$(addprefix $(bindir)/, $(notdir $(BINS)))
 
 MAN1S=\
 	$(MAN_DIR)/man1/acme.1 \
 	$(MAN_DIR)/man1/devdraw.1 \
-	$(MAN_DIR)/man1/9p.1
+	$(MAN_DIR)/man1/9p.1 \
+	$(MAN_DIR)/man1/sam.1
 
 INSTALLED_MAN1S=$(patsubst $(MAN_DIR)/%, $(mandir)/%, $(MAN1S))
 

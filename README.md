@@ -21,7 +21,7 @@ or
 the necessary missing plan9 tools will be automatically installed alongside
 
 for some scenarios, however, it might be benefitial to *always* install the plan9 tools even if they already exist.
-for that case, the `./configure (acme|sam) tools` can be run
+for that case, `./configure (acme|sam) tools` can be run
 
 # Installing
 

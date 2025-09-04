@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  build-acme:
     runs-on: ubuntu-latest
 
     steps:
@@ -19,8 +19,43 @@ jobs:
           sudo apt update
           sudo apt install libx11-dev libxt-dev libfontconfig1-dev
 
+      - name: Configure
+        run: ./configure acme
+
       - name: Build
         run: make
 
       - name: Install
-        run: sudo make install
+        run: make prefix=./dist install
+
+      - name: Find Files
+        run: |
+          find ./dist/bin -type f -name "acme"
+          find ./dist/share/man/man1 -type f -name "acme.1"
+
+  build-sam:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install X11
+        run: |
+          sudo apt update
+          sudo apt install libx11-dev libxt-dev libfontconfig1-dev
+
+      - name: Configure
+        run: ./configure sam
+
+      - name: Build
+        run: make
+
+      - name: Install
+        run: make prefix=./dist install
+
+      - name: Find Files
+        run: |
+          find ./dist/bin -type f -name "sam"
+          find ./dist/bin -type f -name "samterm"
+          find ./dist/share/man/man1 -type f -name "sam.1"

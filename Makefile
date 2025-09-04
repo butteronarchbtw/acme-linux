@@ -8,21 +8,16 @@ mandir=$(DESTDIR)$(prefix)/share/man
 
 BINS=\
 	$(SRC_DIR)/cmd/9pserve/9pserve \
-	$(SRC_DIR)/cmd/acme/acme \
 	$(SRC_DIR)/cmd/devdraw/devdraw \
 	$(SRC_DIR)/cmd/fontsrv/fontsrv \
 	$(SRC_DIR)/cmd/9p/9p \
-	$(SRC_DIR)/cmd/9pfuse/9pfuse \
-	$(SRC_DIR)/cmd/sam/sam \
-	$(SRC_DIR)/cmd/samterm/samterm
+	$(SRC_DIR)/cmd/9pfuse/9pfuse
 
 INSTALLED_BINS=$(addprefix $(bindir)/, $(notdir $(BINS)))
 
 MAN1S=\
-	$(MAN_DIR)/man1/acme.1 \
 	$(MAN_DIR)/man1/devdraw.1 \
-	$(MAN_DIR)/man1/9p.1 \
-	$(MAN_DIR)/man1/sam.1
+	$(MAN_DIR)/man1/9p.1
 
 INSTALLED_MAN1S=$(patsubst $(MAN_DIR)/%, $(mandir)/%, $(MAN1S))
 
@@ -33,10 +28,16 @@ MAN4S=\
 
 INSTALLED_MAN4S=$(patsubst $(MAN_DIR)/%, $(mandir)/%, $(MAN4S))
 
-.PHONY: all $(SRC_DIR) install uninstall clean
+-include config.mk
 
-all: $(SRC_DIR)
+.PHONY: all $(SRC_DIR) install uninstall clean distclean
+
+all: config.mk $(SRC_DIR)
 	@:
+
+config.mk:
+	@echo "run ./configure first"
+	@false
 
 $(SRC_DIR):
 	@$(MAKE) -C src
@@ -54,3 +55,6 @@ uninstall:
 
 clean:
 	@-$(MAKE) -C src clean
+
+distclean: clean
+	-rm config.mk

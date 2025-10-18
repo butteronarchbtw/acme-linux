@@ -93,3 +93,15 @@ src_install() {
 	emake prefix="/usr" DESTDIR="${D}" install
 }
 ```
+
+# Nix
+
+A flake providing `packages.acme` and `packages.sam` is contained in the project root.
+
+You can, for example, run
+
+```
+nix shell github:butteronarchbtw/acme-linux#sam
+```
+
+and use the binaries as explained above.

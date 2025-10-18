@@ -59,3 +59,17 @@ jobs:
           find ./dist/bin -type f -name "sam"
           find ./dist/bin -type f -name "samterm"
           find ./dist/share/man/man1 -type f -name "sam.1"
+
+  build-nix:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: build acme
+        run: docker build --target acme .
+
+      - name: build sam
+        run: docker build --target sam .

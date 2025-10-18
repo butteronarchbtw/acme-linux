@@ -4,7 +4,6 @@ stdenv.mkDerivation {
     src = lib.cleanSource ../.;
     buildInputs = with pkgs; [
         gnumake
-        bash
         xorg.libX11
         xorg.libXt
         fontconfig

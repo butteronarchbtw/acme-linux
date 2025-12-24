@@ -1,7 +1,6 @@
 CC=gcc
 LD=gcc
-#-Wall -Wextra? macht halt den output nicht pretty lol
-CFLAGS=
+CFLAGS=-O2
 LFLAGS=
 AR=ar
 MAKE=make

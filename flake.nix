@@ -16,9 +16,12 @@
           sam = pkgs.callPackage ./nix/sam.nix { };
         };
         formatter = pkgs.nixfmt-rfc-style;
-        devShells.default = pkgs.mkShell.override {
+        devShells.default = pkgs.mkShell {
           packages = with pkgs; [
             gnumake
+            xorg.libX11
+            xorg.libXt
+            fontconfig
           ];
         };
       }

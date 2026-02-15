@@ -307,3 +307,5 @@ src/cmd/fontsrv/fontsrv
 src/cmd/sam/sam
 src/cmd/samterm/samterm
 result
+.envrc
+.direnv/

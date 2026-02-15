@@ -19,8 +19,8 @@
         devShells.default = pkgs.mkShell {
           packages = with pkgs; [
             gnumake
-            xorg.libX11
-            xorg.libXt
+            libX11
+            libXt
             fontconfig
           ];
         };

@@ -4,8 +4,8 @@ stdenv.mkDerivation {
     src = lib.cleanSource ../.;
     buildInputs = with pkgs; [
         gnumake
-        xorg.libX11
-        xorg.libXt
+        libX11
+        libXt
         fontconfig
     ];
     configurePhase = ''

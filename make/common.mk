@@ -1,6 +1,6 @@
 CC=gcc
 LD=gcc
-CFLAGS=-O2
+CFLAGS=-O2 -std=c11
 LFLAGS=
 AR=ar
 MAKE=make

@@ -12,8 +12,20 @@
       in
       {
         packages = rec {
-          acme = pkgs.callPackage ./nix/acme.nix { inherit plan9tools; };
-          sam = pkgs.callPackage ./nix/sam.nix { inherit plan9tools; };
+          acme = pkgs.symlinkJoin {
+            name = "acme";
+            paths = [
+              (pkgs.callPackage ./nix/acme.nix { })
+              plan9tools
+            ];
+          };
+          sam = pkgs.symlinkJoin {
+            name = "sam";
+            paths = [
+              (pkgs.callPackage ./nix/sam.nix { })
+              plan9tools
+            ];
+          };
           plan9tools = pkgs.callPackage ./nix/plan9tools.nix { };
         };
         formatter = pkgs.nixfmt-rfc-style;

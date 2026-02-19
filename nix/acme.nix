@@ -1,4 +1,4 @@
-{pkgs, lib, stdenv, ...}:
+{pkgs, lib, stdenv, plan9tools, ...}:
 stdenv.mkDerivation {
     name = "acme";
     src = lib.cleanSource ../.;
@@ -8,6 +8,7 @@ stdenv.mkDerivation {
         libXt
         fontconfig
     ];
+    propagatedBuildInputs = [ plan9tools ];
     configurePhase = ''
         patchShebangs ./configure
         ./configure acme

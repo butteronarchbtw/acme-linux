@@ -18,10 +18,13 @@ or
 ./configure sam && make
 ```
 
-the necessary missing plan9 tools will be automatically installed alongside
+or
 
-for some scenarios, however, it might be benefitial to *always* install the plan9 tools even if they already exist.
-for that case, `./configure (acme|sam) tools` can be run
+```sh
+./configure tools && make
+```
+
+both acme and sam need plan9tools to run properly (e.g. to set fonts)
 
 # Installing
 
@@ -59,44 +62,11 @@ acme -f <mountpoint>/<fontname>/<fontsize>/font
 
 to run acme
 
-# Gentoo
-
-here is an example ebuild i use on gentoo to install acme system-wide
-
-```ebuild
-EAPI=8
-
-DESCRIPTION="Welcome to acme, the editor/shell/window system hybrid."
-HOMEPAGE="http://acme.cat-v.org/"
-
-LICENSE=""
-SLOT="0"
-KEYWORDS="amd64"
-
-DEPEND=""
-RDEPEND="${DEPEND}"
-BDEPEND=""
-
-inherit git-r3 multiprocessing
-
-EGIT_REPO_URI="https://github.com/butteronarchbtw/acme-linux.git"
-
-src_configure() {
-	./configure acme
-}
-
-src_compile() {
-	emake
-}
-
-src_install() {
-	emake prefix="/usr" DESTDIR="${D}" install
-}
-```
-
 # Nix
 
 A flake providing `packages.acme` and `packages.sam` is contained in the project root.
+
+Both with install `packages.plan9tools` as a dependency alongside automatically.
 
 You can, for example, run
 

@@ -1,6 +1,6 @@
-{pkgs, lib, stdenv, plan9tools, ...}:
+{pkgs, lib, stdenv, ...}:
 stdenv.mkDerivation {
-    name = "sam";
+    name = "plan9tools";
     src = lib.cleanSource ../.;
     buildInputs = with pkgs; [
         gnumake
@@ -8,10 +8,9 @@ stdenv.mkDerivation {
         libXt
         fontconfig
     ];
-    propagatedBuildInputs = [ plan9tools ];
     configurePhase = ''
         patchShebangs ./configure
-        ./configure sam
+        ./configure tools
     '';
     buildPhase = ''
         make -j`nproc`

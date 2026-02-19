@@ -6,52 +6,47 @@ declare -a man1s
 declare -a man4s
 
 usage() {
-	printf "usage:\n"
-	printf "\t$0 (acme|sam) [tools]\n"
+    printf "usage:\n"
+    printf "\t$0 (acme|sam|tools)\n"
 }
 
 add_command() {
-	if ! command -v $1 &> /dev/null || [[ $tools = "tools" ]]; then
-		bins+=("\$(SRC_DIR)/cmd/$1/$1")
+    bins+=("\$(SRC_DIR)/cmd/$1/$1")
 
-		if [[ $2 = 1 ]]; then
-			man1s+=("\$(MAN_DIR)/man1/$1.1")
-		else
-			man4s+=("\$(MAN_DIR)/man4/$1.4")
-		fi
-	fi
+    if [[ $2 = 1 ]]; then
+        man1s+=("\$(MAN_DIR)/man1/$1.1")
+    else
+        man4s+=("\$(MAN_DIR)/man4/$1.4")
+    fi
 }
 
 if [[ $# -lt 1 ]]; then
-	usage
-	exit 1
+    usage
+    exit 1
 fi
 
-tools=$2
-
 case $1 in
-	acme)
-	bins+=("\$(SRC_DIR)/cmd/acme/acme")
-	man1s+=("\$(MAN_DIR)/man1/acme.1")
-	;;
-	sam)
-	bins+=("\$(SRC_DIR)/cmd/sam/sam")
-	bins+=("\$(SRC_DIR)/cmd/samterm/samterm")
-	man1s+=("\$(MAN_DIR)/man1/sam.1")
-	;;
-	*)
-	usage
-	exit 1
-	;;
+    acme)
+    add_command acme 1
+    ;;
+    sam)
+    add_command sam 1
+    bins+=("\$(SRC_DIR)/cmd/samterm/samterm")
+    ;;
+    tools)
+    add_command 9pserve 4
+    add_command devdraw 1
+    add_command fontsrv 4
+    add_command 9p 1
+    add_command 9pfuse 4
+    ;;
+    *)
+    usage
+    exit 1
+    ;;
 esac
 
 :>$cfg
-
-add_command 9pserve 4
-add_command devdraw 1
-add_command fontsrv 4
-add_command 9p 1
-add_command 9pfuse 4
 
 IFS=' '
 printf "BINS=%s\n" "${bins[*]}" >> $cfg

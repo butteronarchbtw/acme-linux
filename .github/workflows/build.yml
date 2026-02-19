@@ -60,6 +60,27 @@ jobs:
           find ./dist/bin -type f -name "samterm"
           find ./dist/share/man/man1 -type f -name "sam.1"
 
+  build-plan9tools:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install X11
+        run: |
+          sudo apt update
+          sudo apt install libx11-dev libxt-dev libfontconfig1-dev
+
+      - name: Configure
+        run: ./configure tools
+
+      - name: Build
+        run: make
+
+      - name: Install
+        run: make prefix=./dist install
+
   build-nix:
 
     runs-on: ubuntu-latest
@@ -73,3 +94,6 @@ jobs:
 
       - name: build sam
         run: docker build --target sam .
+
+      - name: build plan9tools
+        run: docker build --target plan9tools .
